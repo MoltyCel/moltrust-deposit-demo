@@ -1,0 +1,23 @@
+{
+  "sources": {
+    "did:moltrust:sim-insurance": {
+      "keys": [
+        {
+          "algorithm": "ed25519",
+          "keyid": "key-sim-insurance",
+          "public_key": "jNrqvOMB73Hdj7SDAs+R+9GKBWxWQBvlIG8E3+mxpIQ="
+        }
+      ]
+    },
+    "did:moltrust:sim-rates": {
+      "keys": [
+        {
+          "algorithm": "ed25519",
+          "keyid": "key-sim-rates",
+          "public_key": "MyPbTXZuW20CLF7PhLkbiA8htzSeQTobuGwJAL6n7pI="
+        }
+      ]
+    }
+  },
+  "trust_list_version": 1
+}

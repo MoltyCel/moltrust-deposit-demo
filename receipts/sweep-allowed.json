@@ -1,0 +1,123 @@
+{
+  "bundle": {
+    "aer_version": "3.0",
+    "bundle_commit": "sha256:3d4d271d04f62cc96eaeaca93a82e145f72640b1f466abec6f0cab0a8bb0519b",
+    "decision_timestamp": "2026-10-15T08:00:00Z",
+    "items": [
+      {
+        "payload": "eyJhZXJfdmVyc2lvbiI6IjMuMCIsIm5vbmNlIjoic3dlZXAtYWxsb3dlZC1yYXRlLXNpbS1iYW5rLXN1ZWQiLCJxdWVyeSI6eyJpbnN0aXR1dGlvbiI6InNpbS1iYW5rLXN1ZWQiLCJraW5kIjoiY2gubW9sdHJ1c3QuZGVwb3NpdC5yYXRlIiwicmF0ZV9iYXNpcyI6IkFQWSJ9LCJzb3VyY2VfaWQiOiJkaWQ6bW9sdHJ1c3Q6c2ltLXJhdGVzIiwidmFsaWRfZnJvbSI6IjIwMjYtMTAtMTVUMDY6MDA6MDBaIiwidmFsaWRfdW50aWwiOiIyMDI2LTEwLTE1VDEwOjAwOjAwWiIsInZhbHVlIjo0MjV9",
+        "payloadType": "application/vnd.moltrust.aer-evidence+json",
+        "signatures": [
+          {
+            "keyid": "key-sim-rates",
+            "sig": "KMRagBDeH+5Efi7e/AF2UuFSB7mZJpq2QccxjtIfYcLZ+p28sOG9sCXCXLCOA1wUqkAFJAD1yutnAxQa6V8tAg=="
+          }
+        ]
+      },
+      {
+        "payload": "eyJhZXJfdmVyc2lvbiI6IjMuMCIsIm5vbmNlIjoic3dlZXAtYWxsb3dlZC1yYXRlLXNpbS1iYW5rLW5vcmQiLCJxdWVyeSI6eyJpbnN0aXR1dGlvbiI6InNpbS1iYW5rLW5vcmQiLCJraW5kIjoiY2gubW9sdHJ1c3QuZGVwb3NpdC5yYXRlIiwicmF0ZV9iYXNpcyI6IkFQWSJ9LCJzb3VyY2VfaWQiOiJkaWQ6bW9sdHJ1c3Q6c2ltLXJhdGVzIiwidmFsaWRfZnJvbSI6IjIwMjYtMTAtMTVUMDY6MDA6MDBaIiwidmFsaWRfdW50aWwiOiIyMDI2LTEwLTE1VDEwOjAwOjAwWiIsInZhbHVlIjoxODB9",
+        "payloadType": "application/vnd.moltrust.aer-evidence+json",
+        "signatures": [
+          {
+            "keyid": "key-sim-rates",
+            "sig": "h+me5z14SxSHiEO1ZjwDSTOTTO8wkkx6TTJrNUcwkDiGltxZAPu8/kiLtzqqnqgD5zSn15yV+BrnmxXtJP16CQ=="
+          }
+        ]
+      },
+      {
+        "payload": "eyJhZXJfdmVyc2lvbiI6IjMuMCIsIm5vbmNlIjoic3dlZXAtYWxsb3dlZC1pbnMtc2ltLWJhbmstc3VlZCIsInF1ZXJ5Ijp7Imluc3RpdHV0aW9uIjoic2ltLWJhbmstc3VlZCIsImtpbmQiOiJjaC5tb2x0cnVzdC5kZXBvc2l0Lmluc3VyYW5jZSJ9LCJzb3VyY2VfaWQiOiJkaWQ6bW9sdHJ1c3Q6c2ltLWluc3VyYW5jZSIsInZhbGlkX2Zyb20iOiIyMDI2LTEwLTE1VDA2OjAwOjAwWiIsInZhbGlkX3VudGlsIjoiMjAyNi0xMC0xNVQxMDowMDowMFoiLCJ2YWx1ZSI6IlNJTS1ER1MtQiJ9",
+        "payloadType": "application/vnd.moltrust.aer-evidence+json",
+        "signatures": [
+          {
+            "keyid": "key-sim-insurance",
+            "sig": "2RDXHV75bCXgE7SLZdZSsNZzK+HW43CtotTRwe78QHaerRqDaChXhBES6+z50RkZvgZJHgvqEdiQypSBEDVdCQ=="
+          }
+        ]
+      }
+    ],
+    "kernel_version": "3.0",
+    "mandate_ref": "sha256:ba0bbc3e1584cb1337f0d4da0a6ab9b62bb664122c16b93b139203823be05320",
+    "transaction_ref": "sha256:d41f6e006e0f9e86aa521d2061baeebed844d4cdb91164675d9e5b04aa748f14"
+  },
+  "decision": {
+    "constraint_index": null,
+    "constraint_type": null,
+    "detail": null,
+    "disposition": "allow",
+    "reason": null
+  },
+  "exercises": "all five pass",
+  "history": {
+    "opening_balances": {
+      "sim-bank-nord": {
+        "amount": 5000000,
+        "currency": "USD"
+      },
+      "sim-bank-sued": {
+        "amount": 0,
+        "currency": "USD"
+      }
+    },
+    "transfers": [
+      {
+        "amount": {
+          "amount": 5000000,
+          "currency": "USD"
+        },
+        "exec_time": "2026-07-01T08:00:00Z",
+        "source": "sim-bank-extern",
+        "target": "sim-bank-nord"
+      }
+    ]
+  },
+  "mandate": {
+    "constraints": [
+      {
+        "days": 30,
+        "type": "ch.moltrust.deposit.min_hold_days"
+      },
+      {
+        "min_rate_diff_bp": 150,
+        "rate_basis": "APY",
+        "type": "ch.moltrust.deposit.sweep_threshold_bp"
+      },
+      {
+        "max": 2,
+        "period": "MNTH",
+        "type": "ch.moltrust.deposit.max_sweeps_per_period"
+      },
+      {
+        "max_insured_balance": {
+          "amount": 10000000,
+          "currency": "USD"
+        },
+        "schemes": [
+          "SIM-DGS-A",
+          "SIM-DGS-B"
+        ],
+        "type": "ch.moltrust.deposit.insured_counterparty_only"
+      },
+      {
+        "hours": 6,
+        "type": "ch.moltrust.deposit.execution_window_hours"
+      }
+    ],
+    "mandate_id": "mandate-sim-savings-0001"
+  },
+  "receipt_version": 1,
+  "scenario": "sweep-allowed",
+  "transfer": {
+    "amount": {
+      "amount": 1000000,
+      "currency": "USD"
+    },
+    "exec_time": "2026-10-15T12:07:18Z",
+    "mandate_id": "mandate-sim-savings-0001",
+    "source": "sim-bank-nord",
+    "target": "sim-bank-sued",
+    "trigger_id": "rate-change-0042",
+    "trigger_time": "2026-10-15T08:00:00Z"
+  },
+  "trust_list_version": 1,
+  "window_offset_seconds": 14838
+}

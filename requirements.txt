@@ -1,0 +1,3 @@
+moltrust-enforce @ git+https://github.com/MoltyCel/moltrust-api@048b4e713896304baea88aa8c240124fbebd1bcd#subdirectory=sdk/python
+# Pinned to a commit on purpose: the deposit constraints are SDK 0.8.0, which is not on
+# PyPI yet (PyPI latest is 0.7.1 and carries no ch.moltrust.deposit.* types).
