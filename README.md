@@ -1,11 +1,14 @@
 # moltrust-deposit-demo
 
 A reference savings agent that moves deposits between two **simulated** banks under an open
-payment mandate, and a receipt per sweep that anyone can recompute offline.
+payment mandate, and a receipt per sweep that anyone can recompute offline. A second profile
+does the same for a yield agent moving stablecoins between **simulated** vaults on Base
+Sepolia.
 
 > **Demo, not a financial product.** No investment advice, no banking service, no offer. The
-> banks, their rates and their deposit guarantee schemes are made up test data. Nothing here
-> touches a real account, initiates a payment or writes to a chain.
+> banks, the vaults, their rates, their deposit guarantee schemes and their audits are made up
+> test data. Nothing here touches a real account, initiates a payment or writes to a chain,
+> testnet included.
 
 ## What it shows
 
@@ -82,13 +85,98 @@ transfer history the balances come from, and the decision with the constraint th
 The kernel reads no clock and opens no connection — rates and insurance status reach it only
 through the bundle, which is why the same receipt yields the same decision on any machine.
 
+## The vault profile
+
+```bash
+python -m demo.run_vault
+python -m demo.verify_receipt receipts/vault/*.json
+```
+
+A yield agent that moves stablecoins between vaults is the savings agent with one rule
+swapped. There is no deposit guarantee for a vault, so "only insured banks" becomes "only
+the vaults on this list, and only while the audit they were approved on still covers them".
+Holding period, rate spread, sweep limit and execution window are the same four constraints
+with the same values, decided by the same kernel.
+
+| Constraint | In this mandate |
+|---|---|
+| `min_hold_days` | 30 days in a vault before the money may leave again |
+| `sweep_threshold_bp` | the target vault must pay at least 150 bp more (APY) |
+| `max_sweeps_per_period` | at most 2 moves per calendar month |
+| `ch.moltrust.vault.audited_vault_only` | target on the list, its listed audit report still current, position ≤ 100,000.00 USD |
+| `execution_window_hours` | execute at `trigger_time + hash-derived offset`, within 6 h |
+
+The new constraint lives in `demo/vaults.py`. It names each vault by its CAIP-10 account id
+and pins the audit report the vault was approved on. A signed observation from a simulated
+audit source says which report covers the code deployed at the vault at the trigger; if it
+names a different one, or none, the move is refused. It is outside the kernel's namespace,
+so the kernel leaves it alone, and the evidence bundle still binds it because the bundle
+commits to the whole mandate.
+
+The three vaults are simulated. Their addresses are derived from a published string,
+`sha256("moltrust:deposit-demo-vault:" + name)`, last 20 bytes. On 24.10.2026 all three had
+no code and no transactions on Base Sepolia (chain id 84532). No transaction is sent, the
+demo reads no chain.
+
+Every constraint is run twice, once on the allowed side of its boundary and once just past
+it. Twelve moves, one receipt each into `receipts/vault/`:
+
+```
+scenario                               disposition  reason
+vault-allowed-hold-boundary            allow        -
+vault-forbidden-holding-period         forbid       holding period not elapsed
+vault-allowed-rate-boundary            allow        -
+vault-forbidden-rate-spread            forbid       rate difference below threshold
+vault-allowed-sweep-limit-boundary     allow        -
+vault-forbidden-sweep-limit            forbid       sweep limit reached
+vault-allowed-position-boundary        allow        -
+vault-forbidden-unlisted-vault         forbid       target vault not on the list
+vault-forbidden-audit-lapsed           forbid       audit no longer covers the vault
+vault-forbidden-above-position-limit   forbid       above position limit
+vault-allowed-window-boundary          allow        -
+vault-held-execution-window            hold         outside execution window
+```
+
+The boundaries: 30 days held against 29 days and 23 h 59 min 59 s, a spread of 150 bp against
+149, the second move of the month against the third, a position that ends exactly at the
+limit against one cent over, 300 s after the computed time against the trigger itself.
+Gamma, the vault that is not listed, pays the highest rate of the three; the agent still
+may not move there.
+
+### A second chain: Solana devnet (documented, not built)
+
+The mandate format does not name a chain. The chain is part of each vault's id, so a vault
+on Solana devnet is listed as
+`solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1:<base58 address>` (CAIP-2 reference per
+[the Solana namespace](https://namespaces.chainagnostic.org/solana/caip2)). The constraint
+check already keeps such ids exactly as written; only `eip155` addresses are fixed to lower
+case, because only those are case-insensitive.
+
+What would change for Solana:
+
+- **Vault ids.** The listed account would be the vault's state account, not a contract
+  address.
+- **The audit observation.** On Solana the audited code is a program, and an upgradeable
+  program can change under the same address. The audit source would name the program id
+  and the hash of the deployed program data, and "audit lapsed" would mean that hash no
+  longer matches the audited build.
+- **The rate source.** It would read the vault's state accounts instead of a contract's
+  view functions. The observation it signs keeps the same shape.
+
+What stays the same: the mandate, the four kernel constraints, amounts in USD minor units,
+the evidence bundle, the receipts and the verifier. Building this waits until there is a
+reason to.
+
 ## Layout
 
 ```
-demo/sources.py        the two simulated banks, the two evidence sources, the trust list
-demo/run_scenarios.py  the agent: plans five sweeps, decides each, writes the receipts
-demo/verify_receipt.py the offline check
-receipts/              written by the run, including trust-list.json
+demo/sources.py        the two simulated banks, the three evidence sources, the trust list
+demo/run_scenarios.py  the savings agent: plans five sweeps, decides each, writes the receipts
+demo/vaults.py         the simulated vaults and the audited_vault_only check
+demo/run_vault.py      the yield agent: plans twelve moves, decides each, writes the receipts
+demo/verify_receipt.py the offline check, for both profiles
+receipts/              written by the runs, including trust-list.json
+receipts/vault/        the receipts of the vault profile
 ```
 
 The demo signing keys are derived from a published string in `demo/sources.py`. They are

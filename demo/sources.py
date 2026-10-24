@@ -37,7 +37,8 @@ BANKS = {
 }
 
 # Who may say what. A rate observation signed by the insurance source is not a rate.
-SOURCES = ("sim-rates", "sim-insurance")
+# `sim-audit` speaks only for the vault profile (`demo/vaults.py`).
+SOURCES = ("sim-rates", "sim-insurance", "sim-audit")
 
 
 def source_key(name: str) -> Ed25519PrivateKey:

@@ -1,0 +1,153 @@
+{
+  "bundle": {
+    "aer_version": "3.0",
+    "bundle_commit": "sha256:5b6fc95e77c0f88d04a673f80576444fdc778ac81688fd87fee41c1a14ba6daf",
+    "decision_timestamp": "2026-10-15T08:00:00Z",
+    "items": [
+      {
+        "payload": "eyJhZXJfdmVyc2lvbiI6IjMuMCIsIm5vbmNlIjoidmF1bHQtZm9yYmlkZGVuLXN3ZWVwLWxpbWl0LWF1ZGl0IiwicXVlcnkiOnsia2luZCI6ImNoLm1vbHRydXN0LnZhdWx0LmF1ZGl0IiwidmF1bHQiOiJlaXAxNTU6ODQ1MzI6MHg1MThmMTE4ZWFhMDJhZGM2OTA4NWQzNWUzMmIyMmVjMmFhZDJkZGJmIn0sInNvdXJjZV9pZCI6ImRpZDptb2x0cnVzdDpzaW0tYXVkaXQiLCJ2YWxpZF9mcm9tIjoiMjAyNi0xMC0xNVQwNjowMDowMFoiLCJ2YWxpZF91bnRpbCI6IjIwMjYtMTAtMTVUMTA6MDA6MDBaIiwidmFsdWUiOiJTSU0tQVVESVQtMjAyNi1CIn0=",
+        "payloadType": "application/vnd.moltrust.aer-evidence+json",
+        "signatures": [
+          {
+            "keyid": "key-sim-audit",
+            "sig": "slfvug6QByenT6rfi4qriR6zg3Fqa2Oy30M6V9vxtOVUhaKDntLP2wldyC7IfDoY7cSs84s2arYuLbp9/LFTDw=="
+          }
+        ]
+      },
+      {
+        "payload": "eyJhZXJfdmVyc2lvbiI6IjMuMCIsIm5vbmNlIjoidmF1bHQtZm9yYmlkZGVuLXN3ZWVwLWxpbWl0LXJhdGUtZWlwMTU1Ojg0NTMyOjB4MWEzN2Y4MmQ3ZjAwOGI3MmMwNzE0MGU1YmQ5ZTQyYjY0YzE3N2I2ZSIsInF1ZXJ5Ijp7Imluc3RpdHV0aW9uIjoiZWlwMTU1Ojg0NTMyOjB4MWEzN2Y4MmQ3ZjAwOGI3MmMwNzE0MGU1YmQ5ZTQyYjY0YzE3N2I2ZSIsImtpbmQiOiJjaC5tb2x0cnVzdC5kZXBvc2l0LnJhdGUiLCJyYXRlX2Jhc2lzIjoiQVBZIn0sInNvdXJjZV9pZCI6ImRpZDptb2x0cnVzdDpzaW0tcmF0ZXMiLCJ2YWxpZF9mcm9tIjoiMjAyNi0xMC0xNVQwNjowMDowMFoiLCJ2YWxpZF91bnRpbCI6IjIwMjYtMTAtMTVUMTA6MDA6MDBaIiwidmFsdWUiOjM5MH0=",
+        "payloadType": "application/vnd.moltrust.aer-evidence+json",
+        "signatures": [
+          {
+            "keyid": "key-sim-rates",
+            "sig": "o9TdsHr8WtgIOeEIDztJh5igJLGtNC7HVZYs3zX6dCf/eJp8AbrY+3/IR1aDSuQpKE29t/CXxtYEoqze+xbqAA=="
+          }
+        ]
+      },
+      {
+        "payload": "eyJhZXJfdmVyc2lvbiI6IjMuMCIsIm5vbmNlIjoidmF1bHQtZm9yYmlkZGVuLXN3ZWVwLWxpbWl0LXJhdGUtZWlwMTU1Ojg0NTMyOjB4NTE4ZjExOGVhYTAyYWRjNjkwODVkMzVlMzJiMjJlYzJhYWQyZGRiZiIsInF1ZXJ5Ijp7Imluc3RpdHV0aW9uIjoiZWlwMTU1Ojg0NTMyOjB4NTE4ZjExOGVhYTAyYWRjNjkwODVkMzVlMzJiMjJlYzJhYWQyZGRiZiIsImtpbmQiOiJjaC5tb2x0cnVzdC5kZXBvc2l0LnJhdGUiLCJyYXRlX2Jhc2lzIjoiQVBZIn0sInNvdXJjZV9pZCI6ImRpZDptb2x0cnVzdDpzaW0tcmF0ZXMiLCJ2YWxpZF9mcm9tIjoiMjAyNi0xMC0xNVQwNjowMDowMFoiLCJ2YWxpZF91bnRpbCI6IjIwMjYtMTAtMTVUMTA6MDA6MDBaIiwidmFsdWUiOjYxMH0=",
+        "payloadType": "application/vnd.moltrust.aer-evidence+json",
+        "signatures": [
+          {
+            "keyid": "key-sim-rates",
+            "sig": "s+Tl+Anod+hIfjYMo5FxkUrZZsjxFb1MkgKb7KjyWOOd7wGWUOd99jTY28OrWTFdFttCrxWISKdt/Pgn7qvHDA=="
+          }
+        ]
+      }
+    ],
+    "kernel_version": "3.0",
+    "mandate_ref": "sha256:14be6f70074ebffa7960bd27b92bd16a82ade2fc9f384a826809e6a63041af2b",
+    "transaction_ref": "sha256:e4b1aa8df44bba01797c3bb6cdf2c49a8a44715f8a824a85aeaac2a75ec4f0dc"
+  },
+  "chain": "eip155:84532",
+  "decision": {
+    "constraint_index": 2,
+    "constraint_type": "ch.moltrust.deposit.max_sweeps_per_period",
+    "detail": {
+      "count": 2,
+      "max": 2,
+      "period": "MNTH"
+    },
+    "disposition": "forbid",
+    "reason": "sweep limit reached"
+  },
+  "exercises": "max_sweeps_per_period: third of two",
+  "history": {
+    "opening_balances": {
+      "eip155:84532:0x1a37f82d7f008b72c07140e5bd9e42b64c177b6e": {
+        "amount": 0,
+        "currency": "USD"
+      },
+      "eip155:84532:0x518f118eaa02adc69085d35e32b22ec2aad2ddbf": {
+        "amount": 0,
+        "currency": "USD"
+      }
+    },
+    "transfers": [
+      {
+        "amount": {
+          "amount": 5000000,
+          "currency": "USD"
+        },
+        "exec_time": "2026-07-01T08:00:00Z",
+        "source": "sim-onramp",
+        "target": "eip155:84532:0x1a37f82d7f008b72c07140e5bd9e42b64c177b6e"
+      },
+      {
+        "amount": {
+          "amount": 1000000,
+          "currency": "USD"
+        },
+        "exec_time": "2026-10-02T09:00:00Z",
+        "source": "eip155:84532:0x1a37f82d7f008b72c07140e5bd9e42b64c177b6e",
+        "target": "eip155:84532:0x518f118eaa02adc69085d35e32b22ec2aad2ddbf"
+      },
+      {
+        "amount": {
+          "amount": 1000000,
+          "currency": "USD"
+        },
+        "exec_time": "2026-10-05T09:00:00Z",
+        "source": "eip155:84532:0x1a37f82d7f008b72c07140e5bd9e42b64c177b6e",
+        "target": "eip155:84532:0x518f118eaa02adc69085d35e32b22ec2aad2ddbf"
+      }
+    ]
+  },
+  "mandate": {
+    "constraints": [
+      {
+        "days": 30,
+        "type": "ch.moltrust.deposit.min_hold_days"
+      },
+      {
+        "min_rate_diff_bp": 150,
+        "rate_basis": "APY",
+        "type": "ch.moltrust.deposit.sweep_threshold_bp"
+      },
+      {
+        "max": 2,
+        "period": "MNTH",
+        "type": "ch.moltrust.deposit.max_sweeps_per_period"
+      },
+      {
+        "max_position": {
+          "amount": 10000000,
+          "currency": "USD"
+        },
+        "type": "ch.moltrust.vault.audited_vault_only",
+        "vaults": [
+          {
+            "audit": "SIM-AUDIT-2026-A",
+            "vault": "eip155:84532:0x1a37f82d7f008b72c07140e5bd9e42b64c177b6e"
+          },
+          {
+            "audit": "SIM-AUDIT-2026-B",
+            "vault": "eip155:84532:0x518f118eaa02adc69085d35e32b22ec2aad2ddbf"
+          }
+        ]
+      },
+      {
+        "hours": 6,
+        "type": "ch.moltrust.deposit.execution_window_hours"
+      }
+    ],
+    "mandate_id": "mandate-sim-vault-0001"
+  },
+  "profile": "vault",
+  "receipt_version": 1,
+  "scenario": "vault-forbidden-sweep-limit",
+  "transfer": {
+    "amount": {
+      "amount": 1000000,
+      "currency": "USD"
+    },
+    "exec_time": "2026-10-15T11:04:40Z",
+    "mandate_id": "mandate-sim-vault-0001",
+    "source": "eip155:84532:0x1a37f82d7f008b72c07140e5bd9e42b64c177b6e",
+    "target": "eip155:84532:0x518f118eaa02adc69085d35e32b22ec2aad2ddbf",
+    "trigger_id": "vault-rate-0106",
+    "trigger_time": "2026-10-15T08:00:00Z"
+  },
+  "trust_list_version": 1,
+  "window_offset_seconds": 11080
+}

@@ -1,5 +1,14 @@
 {
   "sources": {
+    "did:moltrust:sim-audit": {
+      "keys": [
+        {
+          "algorithm": "ed25519",
+          "keyid": "key-sim-audit",
+          "public_key": "MOdI/HXL4vURKpQ4frKYr6RV5+GwKJJnzJYtQdEljeM="
+        }
+      ]
+    },
     "did:moltrust:sim-insurance": {
       "keys": [
         {
