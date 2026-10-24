@@ -1,6 +1,7 @@
 """Check a sweep receipt offline, without trusting the agent that wrote it.
 
     python -m demo.verify_receipt receipts/sweep-allowed.json
+    python -m demo.verify_receipt receipts/vault/*.json
 
 Four things are checked, in this order:
 
@@ -9,10 +10,12 @@ Four things are checked, in this order:
 2. The recorded execution offset is the hash of `mandate_id|trigger_id` — recomputed here,
    not read from the receipt.
 3. The kernel, run again on the receipt's own mandate, transfer, history and bundle,
-   reaches the same disposition and the same reason.
+   reaches the same disposition and the same reason. A receipt of the vault profile
+   (`"profile": "vault"`) is run through `check_vault_transfer`, which calls the same
+   kernel and adds the vault list.
 4. The receipt states a disposition the kernel knows.
 
-Exit code 0 only if all four hold. The trust list is rebuilt from `demo.sources`, so this
+Exit code 0 only if all four hold, for every receipt named. The trust list is rebuilt from `demo.sources`, so this
 command needs nothing from the network and nothing from the machine that ran the agent.
 """
 from __future__ import annotations
@@ -31,6 +34,7 @@ from moltrust_enforce.deposit import (
 )
 
 from .sources import trust_list
+from .vaults import check_vault_transfer
 
 WINDOW_HOURS = 6
 
@@ -53,8 +57,9 @@ def verify(receipt: Dict[str, Any]) -> list:
         problems.append(f"offset: receipt says {receipt.get('window_offset_seconds')}, "
                         f"recomputed {offset}")
 
-    again = check_transfer(receipt["mandate"], receipt["transfer"], receipt["history"],
-                           receipt["bundle"])
+    check = check_vault_transfer if receipt.get("profile") == "vault" else check_transfer
+    again = check(receipt["mandate"], receipt["transfer"], receipt["history"],
+                  receipt["bundle"])
     if again.disposition != recorded.get("disposition"):
         problems.append(f"kernel: receipt says {recorded.get('disposition')}, "
                         f"kernel says {again.disposition}")
@@ -66,17 +71,29 @@ def verify(receipt: Dict[str, Any]) -> list:
 
 
 def main(argv: list) -> int:
-    if len(argv) != 2:
+    if len(argv) < 2:
         print(__doc__.strip().splitlines()[0])
-        print("usage: python -m demo.verify_receipt <receipt.json>")
+        print("usage: python -m demo.verify_receipt <receipt.json> [<receipt.json> ...]")
         return 2
 
-    with open(argv[1]) as fh:
+    failed = 0
+    for i, path in enumerate(argv[1:]):
+        if i:
+            print()
+        failed += check_one(path)
+    if len(argv) > 2:
+        print()
+        print(f"{len(argv) - 1 - failed} of {len(argv) - 1} receipts hold")
+    return 1 if failed else 0
+
+
+def check_one(path: str) -> int:
+    with open(path) as fh:
         receipt = json.load(fh)
 
     problems = verify(receipt)
     decision = receipt["decision"]
-    print(f"receipt   {argv[1]}")
+    print(f"receipt   {path}")
     print(f"scenario  {receipt['scenario']} ({receipt['exercises']})")
     print(f"decision  {decision['disposition']}  {decision['reason'] or '-'}")
     print(f"offset    {receipt['window_offset_seconds']} s after the trigger, recomputed")
